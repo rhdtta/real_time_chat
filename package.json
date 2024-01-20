@@ -1,0 +1,19 @@
+{
+  "name": "real_time_chat",
+  "version": "1.0.0",
+  "description": "Build a simple chat applications using raw websockets in Node.js that supports the following features -",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@types/websocket": "^1.0.10",
+    "websocket": "^1.0.34"
+  }
+}
