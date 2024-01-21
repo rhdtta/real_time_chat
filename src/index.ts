@@ -1,6 +1,8 @@
 import { server as WebSocketServer} from 'websocket';
 import http from 'http';
-import { User } from './userManager/User';
+import { UserManager } from './userManager/UserManager';
+import { Store } from './store/InMemoryStore';
+import { MessageType, messageEnums } from './message/Message';
 
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
@@ -11,25 +13,43 @@ server.listen(8080, function() {
     console.log((new Date()) + ' Server is listening on port 8080');
 });
 
+const userManager = new UserManager();
+const store = new Store();
+
 const wsServer = new WebSocketServer({
     httpServer: server,
-    autoAcceptConnections: true
+    autoAcceptConnections: false // true => the control will never reach .on('request', ...)
 });
 
 wsServer.on('request', function(request) {
-    console.log('hello')
     
     var connection = request.accept('echo-protocol', request.origin);
-    // const user = new User("A", "B", "Name", connection);
 
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
-        if (message.type === 'utf8') {
-            console.log('Received Message: ' + message.utf8Data);
-            connection.sendUTF(message.utf8Data);
+        try {
+            messageHandler()
+        } catch(e) {
+
         }
     });
     connection.on('close', function(reasonCode, description) {
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
     });
 });
+
+
+function messageHandler(message: MessageType) {
+    if(message.type == messageEnums.init_user) {
+        userManager.addUser(payload.roomId)
+    }
+
+    if(message.type == messageEnums.incoming_message) {
+
+    }
+
+    if(message.type == messageEnums.outgoing_message) {
+
+    }
+
+}
