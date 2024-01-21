@@ -4,7 +4,8 @@
   "description": "Build a simple chat applications using raw websockets in Node.js that supports the following features -",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc && node dist/index.js" 
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   },
   "dependencies": {
     "@types/websocket": "^1.0.10",
-    "websocket": "^1.0.34"
+    "websocket": "^1.0.34",
+    "zod": "^3.22.4"
   }
 }
